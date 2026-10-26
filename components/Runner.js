@@ -61,6 +61,15 @@ export default function Runner({ form, mode = "live", startAt, compact = false, 
 
   useEffect(() => () => clearTimeout(timer.current), []);
 
+  // no formulário publicado, atalhos funcionam em qualquer ponto da página
+  const keyRef = useRef(null);
+  useEffect(() => {
+    if (!live) return;
+    const h = (e) => keyRef.current && keyRef.current(e);
+    window.addEventListener("keydown", h);
+    return () => window.removeEventListener("keydown", h);
+  }, [live]);
+
   const q = step.kind === "q" ? qs[step.index] : null;
   const ctx = useMemo(
     () => buildContext(def, answers, { ...hidden, pontuacao: final?.score ?? "", resultado: final?.result ?? "" }),
@@ -193,6 +202,8 @@ export default function Runner({ form, mode = "live", startAt, compact = false, 
       if (n >= min && n <= max) { const ans = { ...answers, [q.id]: n }; setAnswers(ans); timer.current = setTimeout(() => goNext(ans), 380); }
     }
   }
+
+  keyRef.current = onKeyDown;
 
   async function onFile(file) {
     if (!file || !q) return;
@@ -391,7 +402,7 @@ export default function Runner({ form, mode = "live", startAt, compact = false, 
   }
 
   return (
-    <div ref={rootRef} tabIndex={-1} onKeyDown={onKeyDown} className={"runner" + (compact ? " compact" : "") + (full ? " full" : "")} style={style}>
+    <div ref={rootRef} tabIndex={-1} onKeyDown={live ? undefined : onKeyDown}className={"runner" + (compact ? " compact" : "") + (full ? " full" : "")} style={style}>
       <div className="r-progress"><div style={{ width: pct + "%" }} /></div>
       {theme.logo && <img className="r-logo" src={theme.logo} alt="" />}
       <div className="r-stage">{body}</div>
