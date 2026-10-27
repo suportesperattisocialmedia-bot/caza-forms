@@ -223,7 +223,8 @@ export default function Runner({ form, mode = "live", startAt, compact = false, 
     setBusy(false);
   }
 
-  const accentText = `color-mix(in srgb, ${theme.accent} 45%, #ffffff)`;
+  const isLight = (() => { const h = String(theme.bg || "").replace("#", ""); if (h.length < 6) return false; const [r, g, b] = [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16)); return 0.299 * r + 0.587 * g + 0.114 * b > 150; })();
+  const accentText = isLight ? theme.accent : `color-mix(in srgb, ${theme.accent} 45%, #ffffff)`;
   const style = {
     "--r-bg": theme.bg, "--r-fg": theme.text, "--r-accent": theme.accent, "--r-accent-text": accentText,
     "--r-font": theme.font === "sans" ? "var(--sans)" : "var(--serif)",

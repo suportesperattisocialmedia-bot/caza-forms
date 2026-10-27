@@ -582,7 +582,7 @@ function Builder({ id }) {
       {tab === "build" ? (
         <div className="bbody">
           {list}
-          <div className="bcol editor"><div className="editor-inner">{editor}</div></div>
+          <div className="bcol editor"><div className="editor-inner" key={sel}>{editor}</div></div>
           {preview}
         </div>
       ) : (

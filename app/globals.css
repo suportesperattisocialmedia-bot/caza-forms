@@ -138,7 +138,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01e
 .qitem .t { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .qitem .t.ph { color: var(--muted-2); }
 .qitem .lg { font-size: 11px; color: #d98a99; }
-.add-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 10px; margin-top: 8px; background: var(--surface-2); border: 1px solid var(--border-2); border-radius: 12px; }
+.add-menu { display: grid; grid-template-columns: 1fr; gap: 2px; padding: 10px; margin-top: 8px; background: var(--surface-2); border: 1px solid var(--border-2); border-radius: 12px; }
 .add-menu button { display: flex; align-items: center; gap: 8px; padding: 8px; border: 0; border-radius: 8px; background: transparent; cursor: pointer; font-size: 13px; text-align: left; }
 .add-menu button:hover { background: var(--surface-3); }
 .add-menu .ic { width: 22px; height: 22px; border-radius: 6px; background: rgba(107, 30, 46, .3); color: #e7a5b2; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; flex: none; }
@@ -238,7 +238,7 @@ select.r-input option { background: #111; color: #eee; }
 .r-stars button { background: none; border: 0; cursor: pointer; font-size: 44px; line-height: 1; color: color-mix(in srgb, var(--r-fg) 22%, transparent); padding: 0; transition: transform .12s, color .12s; }
 .r-stars button.on { color: var(--r-accent-text); }
 .r-stars button:hover { transform: scale(1.1); }
-.r-drop { border: 1.5px dashed color-mix(in srgb, var(--r-fg) 30%, transparent); border-radius: 14px; padding: 36px 20px; text-align: center; cursor: pointer; transition: border-color .15s, background .15s; }
+.r-drop { display: block; border: 1.5px dashed color-mix(in srgb, var(--r-fg) 30%, transparent); border-radius: 14px; padding: 36px 20px; text-align: center; cursor: pointer; transition: border-color .15s, background .15s; }
 .r-drop:hover { border-color: var(--r-accent-text); background: color-mix(in srgb, var(--r-accent) 8%, transparent); }
 .r-actions { display: flex; align-items: center; gap: 14px; margin-top: 26px; flex-wrap: wrap; }
 .r-btn { height: 46px; padding: 0 22px; border-radius: 10px; border: 0; background: var(--r-accent); color: #fff; font-size: 17px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 0 28px color-mix(in srgb, var(--r-accent) 45%, transparent); transition: filter .15s, transform .1s; text-decoration: none; }
