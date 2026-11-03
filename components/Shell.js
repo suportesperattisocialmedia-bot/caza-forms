@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { sb } from "@/lib/supabase";
+import { getSessionSafe } from "@/lib/session";
+import Offline from "@/components/Offline";
 
 export function Brand() {
   return (
@@ -18,11 +20,13 @@ export default function Shell({ children, bare = false }) {
   const router = useRouter();
   const path = usePathname();
   const [session, setSession] = useState(undefined);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
-    sb().auth.getSession().then(({ data }) => {
-      setSession(data.session);
-      if (!data.session) router.replace("/login");
+    getSessionSafe().then((r) => {
+      if (r.timeout) return setFailed(true);
+      setSession(r.session);
+      if (!r.session) router.replace("/login");
     });
     const { data: sub } = sb().auth.onAuthStateChange((_e, s) => {
       setSession(s);
@@ -31,6 +35,7 @@ export default function Shell({ children, bare = false }) {
     return () => sub.subscription.unsubscribe();
   }, [router]);
 
+  if (failed && !session) return <Offline />;
   if (!session) return <div className="empty">Carregando...</div>;
 
   return (
