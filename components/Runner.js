@@ -391,7 +391,7 @@ export default function Runner({ form, mode = "live", startAt, compact = false, 
     } else if (ending.buttonUrl) href = RR(ending.buttonUrl);
     body = (
       <div className="r-slide r-center" key={"end" + ending.id}>
-        {showScore && (step.preview || final) && <div className="r-result-tag">{RR(ending.category || ending.title)}</div>}
+        {showScore && !ending.hideResult && (step.preview || final) && <div className="r-result-tag">{RR(ending.category || ending.title)}</div>}
         <h1 className="r-title" style={{ fontSize: compact ? 24 : "clamp(26px,3.6vw,38px)" }}>{RR(ending.title)}</h1>
         {ending.message && <p className="r-desc">{RR(ending.message)}</p>}
         {ending.buttonLabel && href && (
