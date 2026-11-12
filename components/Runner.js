@@ -362,7 +362,7 @@ export default function Runner({ form, mode = "live", startAt, compact = false, 
     const singleChoice = CHOICE_TYPES.includes(q.type) && q.type !== "dropdown" && !q.multiple;
     body = (
       <div className={"r-slide" + (dir === "back" ? " back" : "")} key={q.id}>
-        <div className="r-num">{isStatement ? "❝" : `${step.index + 1} →`}</div>
+        <div className="r-num">{isStatement ? "❝" : `${history.filter((h) => h.kind === "q" && qs[h.index] && qs[h.index].type !== "statement").length + 1} →`}</div>
         <h1 className="r-title">{R(q.title) || <span style={{ opacity: .35 }}>Sua pergunta aqui</span>}{q.required && !isStatement && <span className="req"> *</span>}</h1>
         {q.description && <p className="r-desc">{R(q.description)}</p>}
         {q.image && <img className="r-img" src={q.image} alt="" />}
