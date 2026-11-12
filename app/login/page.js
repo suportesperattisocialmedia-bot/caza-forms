@@ -5,6 +5,7 @@ import { sb } from "@/lib/supabase";
 
 function traduz(msg = "") {
   if (/Invalid login/i.test(msg)) return "E-mail ou senha incorretos.";
+  if (/Failed to fetch|NetworkError|Load failed/i.test(msg)) return "Sem conexão com o servidor. Verifique sua internet e tente de novo.";
   if (/nao autorizado|Database error saving new user/i.test(msg)) return "Este e-mail não está liberado. Peça para um administrador adicionar você em Equipe.";
   if (/already registered/i.test(msg)) return "Este e-mail já tem conta. Use a aba Entrar.";
   if (/at least 6/i.test(msg)) return "A senha precisa ter pelo menos 6 caracteres.";
