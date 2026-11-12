@@ -353,7 +353,7 @@ export default function Runner({ form, mode = "live", startAt, compact = false, 
           <button className="r-btn" onClick={() => goNext()}>{w.button || "Começar"}</button>
           {enterHint}
         </div>
-        {qs.length > 0 && <div className="r-enter" style={{ marginTop: 18 }}>⏱ Leva cerca de {Math.max(1, Math.round(qs.length * 0.25))} min</div>}
+        {qs.length > 0 && <div className="r-enter" style={{ marginTop: 18 }}>⏱ Leva cerca de {Math.max(1, Math.round(qs.filter((x) => x.type !== "statement").length * 0.15))} min</div>}
       </div>
     );
   } else if (step.kind === "q" && q) {
